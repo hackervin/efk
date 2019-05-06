@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  gem:
+    build:
+      context: ./via-fluentd-gem
+      args:
+        VERSION_CENTOS: $VERSION_CENTOS
+        VERSION_RUBY: $VERSION_RUBY
+    container_name: gem
+    env_file:
+      - ./via-fluentd-gem/fluentd.properties
+    hostname: gem
+    networks:
+      - efk
+    volumes:
+      - ./via-fluentd-gem/config/:/etc/fluent/

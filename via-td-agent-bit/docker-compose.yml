@@ -1,0 +1,16 @@
+version: '3.6'
+
+services:
+  bit:
+    build:
+      context: ./via-td-agent-bit
+      args:
+        VERSION_CENTOS: $VERSION_CENTOS
+    container_name: bit
+    env_file:
+      - ./via-td-agent-bit/fluentd.properties
+    hostname: bit
+    networks:
+      - efk
+    volumes:
+      - ./via-td-agent-bit/config/:/etc/td-agent-bit/

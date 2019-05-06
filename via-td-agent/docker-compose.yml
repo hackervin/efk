@@ -1,0 +1,18 @@
+version: '3.6'
+
+services:
+  agent:
+    build:
+      context: ./via-td-agent
+      args:
+        VERSION_UBUNTU: $VERSION_UBUNTU
+    container_name: agent
+    env_file:
+      - ./via-td-agent/fluentd.properties
+    hostname: agent
+    networks:
+      - efk
+    ports:
+      - "9292:9292"
+    volumes:
+      - ./via-td-agent/config/:/etc/td-agent/
